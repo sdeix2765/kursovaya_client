@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from "../views/LoginView"
 import RoomClassView from '@/views/RoomClassView.vue'
-
+import AddRoomClassView from '../views/AddRoomClassView'
+import AddRoomView from '../views/AddRoomView'
 
 const routes = [
   {
@@ -14,6 +15,16 @@ const routes = [
     path: '/classes',
     name: 'classes',
     component: RoomClassView
+  },  
+  {
+    path: '/addclasses',
+    name: 'addclasses',
+    component: AddRoomClassView
+  },
+  {
+    path: '/addrooms',
+    name: 'addrooms',
+    component: AddRoomView
   },
   {
     path: '/login',
