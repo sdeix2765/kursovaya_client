@@ -4,6 +4,8 @@ import LoginView from "../views/LoginView"
 import RoomClassView from '@/views/RoomClassView.vue'
 import AddRoomClassView from '../views/AddRoomClassView'
 import AddRoomView from '../views/AddRoomView'
+import ReviewsView from '../views/ReviewsView'
+import BookView from '../views/BookView'
 
 const routes = [
   {
@@ -15,6 +17,16 @@ const routes = [
     path: '/classes',
     name: 'classes',
     component: RoomClassView
+  },  
+  {
+    path: '/reviews',
+    name: 'reviews',
+    component: ReviewsView
+  },  
+  {
+    path: '/book',
+    name: 'book',
+    component: BookView
   },  
   {
     path: '/addclasses',

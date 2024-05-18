@@ -8,10 +8,16 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item ms-1">
+          <router-link v-show="!userAuthed" to="/">Главная страница</router-link>
+        </li>
+        <li class="nav-item ms-1">
           <router-link v-show="!userAuthed" to="/login">Авторизация</router-link>
         </li>
         <li class="nav-item ms-1">
           <router-link v-show="!userAuthed" to="/classes">Забронировать</router-link>
+        </li>
+        <li class="nav-item ms-1">
+          <router-link v-show="!userAuthed" to="/reviews">Отзывы</router-link>
         </li>
         <li class="nav-item ms-1">
           <router-link v-show="userAuthed" to="/addclasses">Добавить класс номеров</router-link>
@@ -46,14 +52,18 @@ export default {
   },
   computed: {
     userAuthed() {
-
-      return this.$store.getters.isAuthenticated
+      console.log(this.$store.getters.getToken)
+      if(this.$store.getters.getToken == "" || this.$store.getters.getToken == null){
+        return false
+      }
+      return true
     },
 
 
   },
   methods: {
     LogOut() {
+      localStorage.removeItem('token');
       this.$store.dispatch('deleteToken').then(() => {
         this.$router.push('/')
       }
@@ -65,6 +75,8 @@ export default {
 
   created() {
     this.$store.dispatch('getClasses')
+    this.$store.dispatch('getReviews')
+    this.$store.dispatch('getRooms')
     if (localStorage.getItem('token')) {
       try {
         this.token = localStorage.getItem('token');

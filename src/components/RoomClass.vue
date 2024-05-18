@@ -4,7 +4,7 @@
     <li class="" v-for="(room, index) in rooms" :key="room.id">id: {{ room.id }} <br>  {{ room.name }} <br> <b>Описание:</b> {{ room.description }} <br> <b>Цена:</b> {{ room.price }} <br> <b>Максимальное кол-во людей:</b> {{ room.max_people}} <br> <b>Изображение:</b> 
       <img src="{{host}}/image/{{room.img}}" alt="">
       <img :src="getImageUrl(room.img)" alt="">
-      
+      <button @click="setClass(room)">Забронировать</button>
     <br>
  </li>
 </ul>
@@ -27,6 +27,14 @@ export default {
   },methods: {
     getImageUrl(path) {
       return this.host + '/images/' + path;
+    },
+    setClass(room){
+      this.$store.dispatch('setClass', room).then(() => {
+        this.$router.push('/book')
+      }
+      );
+      
+      
     }
   }
 }
