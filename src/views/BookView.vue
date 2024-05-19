@@ -108,12 +108,10 @@ export default {
       return this.$store.getters.getToken
     },
     rclass() {
-      // let allrooms = this.$store.getters.getRooms
-      // for(let i in allrooms){
-      //   if(i.class_id==this.$store.getters.getClass.id){
-      //     this.rooms.append(i)
-      //   }
-      // }
+      console.log(this.$store.getters.getClass)
+      if(this.$store.getters.getClass.length == 0){
+        this.$router.push('/classes')
+      }
       return this.$store.getters.getClass
     },
 

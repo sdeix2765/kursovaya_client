@@ -1,33 +1,39 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <nav class="border-nav navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid ">
     <a class="navbar-brand" href="#">Курсовая</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse item-menu" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item ms-1">
-          <router-link v-show="!userAuthed" to="/">Главная страница</router-link>
+        <li v-show="!userAuthed" class="nav-item ms-1 item-prices">
+          <router-link  to="/">Главная страница</router-link>
         </li>
-        <li class="nav-item ms-1">
-          <router-link v-show="!userAuthed" to="/login">Авторизация</router-link>
+        <li v-show="!userAuthed" class="nav-item ms-1 item-prices">
+          <router-link  to="/login">Авторизация</router-link>
         </li>
-        <li class="nav-item ms-1">
-          <router-link v-show="!userAuthed" to="/classes">Забронировать</router-link>
+        <li v-show="!userAuthed" class="nav-item ms-1 item-bron">
+          <router-link  to="/classes">Забронировать</router-link>
         </li>
-        <li class="nav-item ms-1">
-          <router-link v-show="!userAuthed" to="/reviews">Отзывы</router-link>
+        <li v-show="!userAuthed" class="nav-item ms-1 item-reviews">
+          <router-link  to="/reviews">Отзывы</router-link>
         </li>
-        <li class="nav-item ms-1">
-          <router-link v-show="userAuthed" to="/addclasses">Добавить класс номеров</router-link>
+        <li v-show="!userAuthed" class="nav-item ms-1 item-reviews">
+          <router-link  to="/contacts">Контакты</router-link>
         </li>
-        <li class="nav-item ms-1">
-          <router-link v-show="userAuthed" to="/addrooms">Добавить номер</router-link>
+        <li v-show="userAuthed" class="nav-item ms-1 item-prices">
+          <router-link  to="/addclasses">Добавить класс номеров</router-link>
+        </li>
+        <li v-show="userAuthed" class="nav-item ms-1 item-prices">
+          <router-link  to="/addrooms">Добавить номер</router-link>
         </li>
       </ul>
       <div v-show="userAuthed" >
-        <button @click="LogOut" class="btn btn-outline-success" >Выйти</button>
+        <button @click="LogOut" class="btn btn-outline" >Выйти</button>
       </div>
     </div>
   </div>
@@ -103,77 +109,6 @@ export default {
   color: #2c3e50;
 }
 
-.preloader {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: black;
-  z-index: 999;
-  display: block;
-}
-
-.loader-line1 {
-  width: 120px;
-  height: 120px;
-  border: 3px solid white;
-  border-radius: 50%;
-  border-top-color: blue;
-  border-bottom-color: transparent;
-  border-left-color: transparent;
-  border-right-color: transparent;
-  left: 50%;
-  top: 50%;
-  position: absolute;
-  transform: translate(-50%, 50%);
-  animation: 2s spin infinite;
-  z-index: 2;
-}
-
-.loader-line2 {
-  width: 130px;
-  height: 130px;
-  border: 3px solid white;
-  border-radius: 50%;
-  border-top-color: blue;
-  border-bottom-color: transparent;
-  border-left-color: transparent;
-  border-right-color: transparent;
-  left: 50%;
-  top: 50%;
-  position: absolute;
-  transform: translate(-50%, 50%);
-  animation: 3s spin infinite;
-  z-index: 1;
-}
-
-.loader-line3 {
-  width: 140px;
-  height: 140px;
-  border: 3px solid white;
-  border-radius: 50%;
-  border-top-color: blue;
-  border-bottom-color: transparent;
-  border-left-color: transparent;
-  border-right-color: transparent;
-  left: 50%;
-  top: 50%;
-  position: absolute;
-  transform: translate(-50%, 50%);
-  animation: 3s spin infinite;
-  z-index: 1;
-}
-
-@keyframes spin {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
 .router-link-active{
   color: #6c757d;
   font-weight: bolder;

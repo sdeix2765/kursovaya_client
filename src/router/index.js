@@ -6,6 +6,7 @@ import AddRoomClassView from '../views/AddRoomClassView'
 import AddRoomView from '../views/AddRoomView'
 import ReviewsView from '../views/ReviewsView'
 import BookView from '../views/BookView'
+import ContactsView from '../views/ContactsView'
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginView
+  },
+  {
+    path: '/Contacts',
+    name: 'Contacts',
+    component: ContactsView
   },
 
 ]

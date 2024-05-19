@@ -1,40 +1,75 @@
 <template>
-<ul>
-  <h1>Класс номеров</h1>
-    <li class="" v-for="(room, index) in rooms" :key="room.id">id: {{ room.id }} <br>  {{ room.name }} <br> <b>Описание:</b> {{ room.description }} <br> <b>Цена:</b> {{ room.price }} <br> <b>Максимальное кол-во людей:</b> {{ room.max_people}} <br> <b>Изображение:</b> 
-      <img src="{{host}}/image/{{room.img}}" alt="">
-      <img :src="getImageUrl(room.img)" alt="">
-      <button @click="setClass(room)">Забронировать</button>
-    <br>
- </li>
-</ul>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <div class="container">
+    <div class="nomera-osnova">
+      <div class="opisanie-nomer">
+        <h1>Номера и цены</h1>
+        <p>К Вашим услугам, отель предлагает комфортабельные номера различных категорий: от классического стандартного
+          номера до просторного роскошного люкса. Все они оборудованы удобной мебелью, выполненной по индивидуальному
+          заказу.
+          Также имеется все необходимое для размещения с детьми. По всей территории отеля работает бесплатный скоростной
+          Wi-Fi. В стоимость проживания включен завтрак.
+          Воспользуйтесь нашей формой онлайн бронирования, чтобы выбрать номер, идеально соответствующий вашим запросам.
+        </p>
+      </div>
+      <ul>
+        <li class="" v-for="(room, index) in rooms" :key="room.id">
+          <div class="nomer-standart">
+            <img :src="getImageUrl(room.img)" alt="qwe">
+        <div class="info">
+          <h1>{{ room.name }}</h1>
+          <button @click="setClass(room)">Забронировать</button>
+          <p>Максимальное кол-во людей {{room.max_people}}</p>
+          <p>{{ room.price }} руб/день</p>
+          <textarea class="bg-gray" readonly name="" id="" cols="30" rows="10">{{ room.description }}</textarea>
+        </div>
+      </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <a href="/">Отель «FSe», Томск</a>
+      <p>© 2024 Официальный сайт</p>
+      <p>Томск, Герцена 18</p>
+      <p>+7(954)68-25-14</p>
+      <div class="weather-info">
+        <p>+1 °C</p>
+        <p>Погода в Томске</p>
+      </div>
+    </div>
+  </footer>
 </template>
 
 
 <script scoped>
 export default {
-    name: "Room classes",
-    computed: {
-    rooms(){
-        return this.$store.getters.getClasses
+  name: "Room classes",
+  computed: {
+    rooms() {
+      return this.$store.getters.getClasses
     },
-    token(){
-        return this.$store.getters.getToken
+    token() {
+      return this.$store.getters.getToken
     },
-    host(){
-        return this.$store.getters.getHost
+    host() {
+      return this.$store.getters.getHost
     }
-  },methods: {
+  }, methods: {
     getImageUrl(path) {
       return this.host + '/images/' + path;
     },
-    setClass(room){
+    setClass(room) {
       this.$store.dispatch('setClass', room).then(() => {
         this.$router.push('/book')
       }
       );
-      
-      
+
+
     }
   }
 }
@@ -42,19 +77,21 @@ export default {
 </script>
 
 <style scoped>
-ul{
-    list-style-type: none;
-    margin:0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-li{
-    margin:10px;
-    padding: 10px ;
-    text-align: left;
-    
+@import '@/assets/style.css';
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
+li {
+  margin: 10px;
+  padding: 10px;
+  text-align: left;
+
+}
 </style>

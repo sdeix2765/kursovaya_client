@@ -76,7 +76,10 @@ export default {
         body: formData
       })
       if(res.status==200){
-        this.errors += 'Создано'
+        this.errors = 'Создано'
+      }
+      if(res.status==403){
+        this.errors = 'Ошибка доступа'
       }
     }
   }

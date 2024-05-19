@@ -1,9 +1,9 @@
 <template>
   <div class="reviews">
-
-    <ul>
-  <h1>Отзывы</h1>
-    <li class="" v-for="(review, index) in reviews" :key="review.id"><b>Имя</b>{{ review.name }} <br> <b>Почта:</b> {{ review.email }} <br> <b>Сообщение:</b> {{ review.message }} <br>  {{ review.date}} 
+    <h1>Отзывы</h1>
+    <ul class="reviews">
+  
+    <li class="review" v-for="(review, index) in reviews" :key="review.id"><b>Имя</b>{{ review.name }} <br> <b></b> {{ review.email }} <br> <b></b> {{ review.message }} <br>  {{ review.date}} 
  </li>
 </ul>
     <form  @submit.prevent="Add">
