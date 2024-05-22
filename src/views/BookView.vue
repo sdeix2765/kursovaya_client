@@ -154,12 +154,12 @@ export default {
             console.log(data.guest_id);
           })
         let formData2 = new FormData();
-        formData2.append('room_id', this.form.first_name);
-        formData2.append('last_name', this.form.last_name);
-        formData2.append('patronymic', this.form.patronymic);
-        formData2.append('number', this.form.number);
-        formData2.append('email', this.form.email);
-        const res2 = await fetch(`${this.host}/addguest`, {
+        formData2.append('room_id', this.$store.getters.getClass.id);
+        formData2.append('guest_id', data.guest_id);
+        formData2.append('guest_count', this.form.guest_count);
+        formData2.append('time_from', this.form.date_from);
+        formData2.append('time_to', this.form.date_to);
+        const res2 = await fetch(`${this.host}/addbook`, {
           method: "POST",
           body: formData
         })
