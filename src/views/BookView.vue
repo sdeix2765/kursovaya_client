@@ -25,13 +25,13 @@
         <input type=email class="form-control" required placeholder="Почта" v-model="form.email">
       </label>
 
-      {{rclass.id}}
+
       <br><br>
 
       <label class="form-label">
         Выберите номер
-        <select required name="select" v-model="form.room_id" >
-          <option v-for="room in rooms"  :value="room.id" > {{room.name}} {{ room.description }}</option>
+        <select required name="select" v-model="form.room_id">
+          <option v-for="room in rooms" :value="room.id"> {{ room.name }} {{ room.description }}</option>
         </select>
       </label>
 
@@ -79,11 +79,12 @@ export default {
         number: '',
         email: '',
         guest_count: '',
-        date_from:'',
-        date_to:'',
-        room_id:'',
+        date_from: '',
+        date_to: '',
+        room_id: '',
+        guest_id: ""
       },
-      roomss:[],
+      roomss: [],
       errors: ''
     }
   },
@@ -91,16 +92,22 @@ export default {
     host() {
       return this.$store.getters.getHost
     },
-    rooms(){
-      this.roomss = []
-      let allrooms = this.$store.getters.getRooms
-      for(let i of allrooms){
+    rooms() {
 
 
-        if(i.class_id==this.$store.getters.getClass.id){
-          console.log(this.rooms)
-          this.roomss.push(i)
+      try {
+        this.roomss = []
+        let allrooms = this.$store.getters.getRooms
+        for (let i of allrooms) {
+
+
+          if (i.class_id == this.$store.getters.getClass.id) {
+            this.roomss.push(i)
+          }
         }
+      }
+      catch {
+        pass
       }
       return this.roomss
     },
@@ -109,7 +116,7 @@ export default {
     },
     rclass() {
       console.log(this.$store.getters.getClass)
-      if(this.$store.getters.getClass.length == 0){
+      if (this.$store.getters.getClass.length == 0) {
         this.$router.push('/classes')
       }
       return this.$store.getters.getClass
@@ -136,6 +143,7 @@ export default {
   methods: {
     async Add() {
       console.log(this.rooms)
+
       if (this.rclass.length == 0) {
         this.$router.push('/classes')
       }
@@ -151,18 +159,34 @@ export default {
           body: formData
         }).then(response => response.json())
           .then(data => {
-            console.log(data.guest_id);
+            console.log(this.guest_id = data.guest_id);
           })
+        console.log("res")
+        console.log(res)
         let formData2 = new FormData();
-        formData2.append('room_id', this.$store.getters.getClass.id);
-        formData2.append('guest_id', data.guest_id);
+        formData2.append('room_id', this.form.room_id);
+        formData2.append('guest_id', this.guest_id);
         formData2.append('guest_count', this.form.guest_count);
         formData2.append('time_from', this.form.date_from);
         formData2.append('time_to', this.form.date_to);
         const res2 = await fetch(`${this.host}/addbook`, {
           method: "POST",
-          body: formData
+          body: formData2
         })
+        function formDataToObject(formData) {
+          const data = {};
+          for (const [key, value] of formData.entries()) {
+            data[key] = value;
+          }
+          return data;
+        }
+        const formDataObject = formDataToObject(formData2);
+        console.log(formDataObject);
+        if (res2.status == 200) {
+
+          this.errors = ''
+          this.$router.push('/');
+        }
       }
       else {
         this.errors += 'Неверно заполнена дата'

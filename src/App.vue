@@ -31,6 +31,18 @@
         <li v-show="userAuthed" class="nav-item ms-1 item-prices">
           <router-link  to="/addrooms">Добавить номер</router-link>
         </li>
+        <li v-show="userAuthed" class="nav-item ms-1 item-prices">
+          <router-link  to="/adminrooms">Список номеров</router-link>
+        </li>
+        <li v-show="userAuthed" class="nav-item ms-1 item-prices">
+          <router-link  to="/adminclass">Список классов номеров</router-link>
+        </li>
+        <li v-show="userAuthed" class="nav-item ms-1 item-prices">
+          <router-link  to="/adminbook">Заявки на бронь</router-link>
+        </li>
+        <li v-show="userAuthed" class="nav-item ms-1 item-prices">
+          <router-link  to="/adminguests">Список гостей</router-link>
+        </li>
       </ul>
       <div v-show="userAuthed" >
         <button @click="LogOut" class="btn btn-outline" >Выйти</button>
@@ -82,7 +94,9 @@ export default {
   created() {
     this.$store.dispatch('getClasses')
     this.$store.dispatch('getReviews')
+    this.$store.dispatch('getBooks')
     this.$store.dispatch('getRooms')
+    this.$store.dispatch('getGuests')
     if (localStorage.getItem('token')) {
       try {
         this.token = localStorage.getItem('token');

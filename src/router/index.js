@@ -7,12 +7,36 @@ import AddRoomView from '../views/AddRoomView'
 import ReviewsView from '../views/ReviewsView'
 import BookView from '../views/BookView'
 import ContactsView from '../views/ContactsView'
+import AdminRoomsView from '../views/AdminRoomsView'
+import AdminClassView from '../views/AdminClassView'
+import AdminBookView from '../views/AdminBookView'
+import AdminGuestsView from '../views/AdminGuestsView'
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/adminrooms',
+    name: 'adminrooms',
+    component: AdminRoomsView
+  },
+  {
+    path: '/adminclass',
+    name: 'adminclass',
+    component: AdminClassView
+  },
+  {
+    path: '/adminbook',
+    name: 'adminbook',
+    component: AdminBookView
+  },  
+  {
+    path: '/adminguests',
+    name: 'adminguests',
+    component: AdminGuestsView
   },
   {
     path: '/classes',

@@ -25,7 +25,22 @@ const getRooms = () => {
     },
   })
 }
-
+const getBooks = () => {
+  return fetch('http://127.0.0.1:8000/api/books', {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+}
+const getGuests = () => {
+  return fetch('http://127.0.0.1:8000/api/guests', {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+}
 
 export default createStore({
   state: {
@@ -34,6 +49,8 @@ export default createStore({
     reviews: [],
     class:[],
     rooms:[],
+    books:[],
+    guests:[],
     host: 'http://127.0.0.1:8000/api'
   },
   getters: {
@@ -55,6 +72,12 @@ export default createStore({
     },
     getRooms(state) {
       return state.rooms
+    },
+    getBooks(state) {
+      return state.books
+    },
+    getGuests(state) {
+      return state.guests
     }
 
   },
@@ -76,6 +99,12 @@ export default createStore({
     },
     SET_ROOMS(state, payload) {
       state.rooms = payload
+    },
+    SET_BOOKS(state, payload) {
+      state.books = payload
+    },
+    SET_GUESTS(state, payload) {
+      state.guests = payload
     },
   },
   actions: {
@@ -119,5 +148,24 @@ export default createStore({
     }
     catch (error) {
     }
+},
+async getBooks({ commit }) {
+  try {
+    const books = await getBooks()
+    console.log("books")
+    console.log(books.json().then(function (value) { commit('SET_BOOKS', value) }))
+
+  }
+  catch (error) {
+  }
+},
+async getGuests({ commit }) {
+  try {
+    const guests = await getGuests()
+    console.log(guests.json().then(function (value) { commit('SET_GUESTS', value) }))
+
+  }
+  catch (error) {
+  }
 }
 }})
